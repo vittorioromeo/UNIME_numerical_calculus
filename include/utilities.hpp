@@ -3,6 +3,7 @@
 #include <limits>
 #include <cmath>
 #include <type_traits>
+#include <algorithm>
 
 namespace nc
 {

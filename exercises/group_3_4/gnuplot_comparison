@@ -1,0 +1,6 @@
+set style data lines
+set offsets 0,0,0,0
+set yrange [0:16]
+set samples 100
+
+plot "temp.txt" u 1:2 title "norm 1" smooth cspline, '' u 1:3 title "norm 2" smooth cspline, '' u 1:4 title "norm inf" smooth cspline, '' u 1:5 title "norm frob" smooth cspline, '' u 1:6 title "log(pert)" smooth cspline

@@ -34,6 +34,9 @@ namespace nc
     template <typename T0, std::size_t TComponentCount>
     using column_vector = matrix<T0, TComponentCount, 1>;
 
+    template <typename T0>
+    using vector_value_type = typename T0::value_type;
+
     // Per evitare errori durante l'accesso ai dati dei vettori, definiamo due
     // funzioni che permettono di ottenere la n-esima componente.
 

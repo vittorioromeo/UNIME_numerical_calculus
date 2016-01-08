@@ -1,0 +1,11 @@
+set term qt 0
+plot [-1 : 1] 1/(1+25*(x**2))
+
+set term qt 1
+plot [-3 : 4][-2 : 2] abs(x)
+
+set term qt 2
+plot [-2 : 2] abs(x)
+
+set term qt 3
+plot [0.1 : 1.5] tan(x)/x
