@@ -20,6 +20,20 @@
 #include "make_matrix.hpp"
 #include "vectors.hpp"
 #include "make_vector.hpp"
-#include "vector_products.hpp"
-#include "notable_matrices.hpp"
-#include "interpolators.hpp"
+
+namespace nc
+{
+    // Esegue il prodotto scalare tra due vettori.
+    template <typename TV0, typename TV1>
+    auto vector_scalar_product(const TV0& v0, const TV1& v1)
+    {
+        return v0 * make_transposed(v1);
+    }
+
+    // Esegue il prodotto tensoriale tra due vettori.
+    template <typename TV0, typename TV1>
+    auto vector_tensor_product(const TV0& v0, const TV1& v1)
+    {
+        return make_transposed(v0) * v1;
+    }
+}

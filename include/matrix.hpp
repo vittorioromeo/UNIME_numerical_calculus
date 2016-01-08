@@ -10,8 +10,10 @@
 #include <limits>
 #include <vrm/core/static_if.hpp>
 
+
+#undef ARMA_USE_ATLAS
 #include <armadillo>
-#include <eigen3/Eigen/Dense>
+
 
 #include "multiples.hpp"
 #include "equations.hpp"
@@ -356,17 +358,6 @@ namespace nc
             }
 
             return res;
-        }
-
-        // Converte la rappresentazione della matrice a quella della libreria
-        // "Eigen", per il calcolo della "norma di Frobenius".
-        auto as_mapped_eigen() const noexcept
-        {
-            using eigen_matrix_type =
-                Eigen::Matrix<T0, TRowCount, TColumnCount>;
-
-            return Eigen::Map<const eigen_matrix_type>(
-                _data.data(), TRowCount, TColumnCount);
         }
 
     public:

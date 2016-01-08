@@ -19,7 +19,20 @@
 #include "matrix.hpp"
 #include "make_matrix.hpp"
 #include "vectors.hpp"
-#include "make_vector.hpp"
-#include "vector_products.hpp"
-#include "notable_matrices.hpp"
-#include "interpolators.hpp"
+
+namespace nc
+{
+    // Crea un vettore riga (matrice 1xN).
+    template <typename T0, typename... Ts>
+    auto make_row_vector(Ts&&... xs)
+    {
+        return make_matrix<T0, 1, sizeof...(Ts)>(xs...);
+    }
+
+    // Crea un vettore colonna (matrice Nx1).
+    template <typename T0, typename... Ts>
+    auto make_column_vector(Ts&&... xs)
+    {
+        return make_matrix<T0, sizeof...(Ts), 1>(xs...);
+    }
+}
