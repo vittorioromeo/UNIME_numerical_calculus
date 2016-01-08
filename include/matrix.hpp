@@ -629,8 +629,9 @@ namespace nc
         }
 
         // Risolvi un sistema lineare tramite il metodo di Jacobi.
-        auto solve_jacobi(std::size_t max_iterations = 100000,
-            accuracy_type accuracy = 0.0001) const noexcept
+        template <typename TF>
+        auto solve_jacobi(std::size_t max_iterations, accuracy_type accuracy,
+            TF loop_fn) const noexcept
         {
             // La matrice deve avere una colonna in più delle righe.
             // (La colonna dei termini noti.)
@@ -643,7 +644,8 @@ namespace nc
             vector_type solution = temp_solution;
 
             divergence_loop(max_iterations, accuracy,
-                [this, &solution, &temp_solution, n](auto& max_divergence)
+                [this, &solution, &temp_solution, n, loop_fn](
+                                auto& max_divergence)
                 {
                     // Itera sulle righe.
                     for(std::size_t i(0); i < TRowCount; i++)
@@ -671,15 +673,24 @@ namespace nc
 
                     // Sostituisce la soluzione precendente con quella corrente.
                     solution = temp_solution;
+                    loop_fn(solution);
                 });
 
             return solution;
         }
 
-        template <typename TSolutions>
+        auto solve_jacobi(std::size_t max_iterations = 100000,
+            accuracy_type accuracy = 0.0001) const noexcept
+        {
+            return solve_jacobi(max_iterations, accuracy, [](const auto&)
+                {
+                });
+        }
+
+        template <typename TSolutions, typename TF>
         auto solve_gauss_seidel(TSolutions phi,
-            std::size_t max_iterations = 100000,
-            accuracy_type accuracy = 0.0001)
+            std::size_t max_iterations,
+            accuracy_type accuracy, TF loop_fn)
         {
             // La matrice deve avere una colonna in più delle righe.
             // (La colonna dei termini noti.)
@@ -692,7 +703,8 @@ namespace nc
             double sigma;
 
             divergence_loop(max_iterations, accuracy,
-                [this, &phi, &temp_phi, &sigma, n](auto& max_divergence)
+                [this, &phi, &temp_phi, &sigma, n, loop_fn](
+                                auto& max_divergence)
                 {
                     // Itera sulle righe.
                     for(int i = 0; i < n; ++i)
@@ -715,9 +727,21 @@ namespace nc
 
                     // Sostituisce la soluzione precendente con quella corrente.
                     temp_phi = phi;
+                    loop_fn(phi);
                 });
 
             return phi;
+        }
+
+        template <typename TSolutions>
+        auto solve_gauss_seidel(TSolutions phi,
+            std::size_t max_iterations = 100000,
+            accuracy_type accuracy = 0.0001)
+        {
+            return solve_gauss_seidel(phi, max_iterations, accuracy,
+                [](const auto&)
+                {
+                });
         }
 
         auto solve_gauss_seidel(std::size_t max_iterations = 100000,
