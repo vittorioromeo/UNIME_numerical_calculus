@@ -25,41 +25,48 @@
 
 namespace nc
 {
-    // Genera un interpolatore di Lagrange.
-    template <typename TVector>
-    auto lagrange_interpolator(const TVector& x, const TVector& fx)
+    // Calcola la base monomiale.
+    template <typename T0, typename T1>
+    auto monomial_basis(const T0& x, const T1& n) noexcept
     {
-        // Verifica validità dei campioni.
-        static_assert(vector_dimension(x) == vector_dimension(fx), "");
-        static_assert(vector_dimension(x) > 0, "");
+        return std::pow(x, n);
+    }
 
-        // Restituisce la funzione interpolante.
-        return [x, fx](float value)
+    // Calcola la base di Lagrange.
+    template <typename TNodeVector, typename T>
+    auto lagrange_basis(const TNodeVector& nodes, const T& k)
+    {
+        constexpr auto n = vector_dimension(nodes);
+
+        return [n, nodes, k](auto x)
         {
-            // Numero dei campioni.
-            constexpr auto x_size = vector_dimension(x);
+            double res(1);
+            const auto& x_k(access_column_vector(nodes, k));
 
-            // Accumulatore del risultato.
-            float result = 0;
+            loop_skipping(0, n, k, [&res, &nodes, &x, &x_k, k](auto i)
+                {
+                    const auto& x_i(access_column_vector(nodes, i));
+                    res *= (x - x_i) / (x_k - x_i);
+                });
 
-            // Esecuzione formula.
-            float num, den;
-            for(int i = 0; i < x_size; i++)
+            return res;
+        };
+    }
+
+    // Calcola la base di Newton.
+    template <typename TNodeVector, typename T>
+    auto newton_basis(const TNodeVector& nodes, const T& j)
+    {
+        return [nodes, j](auto x)
+        {
+            double res(1);
+            for(int i = 0; i < j; ++i)
             {
-                num = den = 1;
-
-                // Salta caso `i == j`.
-                loop_skipping(0, x_size, i, [&num, &den, &x, i, value](auto j)
-                    {
-                        num *= (value - access_column_vector(x, j));
-                        den *= (access_column_vector(x, i) -
-                                access_column_vector(x, j));
-                    });
-
-                result += (num / den) * access_column_vector(fx, i);
+                const auto& x_i(access_column_vector(nodes, i));
+                res *= x - x_i;
             }
 
-            return result;
+            return res;
         };
     }
 
@@ -111,10 +118,39 @@ namespace nc
                 auto coeff = solved_vmm(0, k);
 
                 // Calcola il monomio di grado `k`.
-                acc += coeff * std::pow(value, k);
+                acc += coeff * monomial_basis(value, k);
             }
 
             return acc;
+        };
+    }
+
+
+    // Genera un interpolatore di Lagrange.
+    template <typename TVector>
+    auto lagrange_interpolator(const TVector& x, const TVector& fx)
+    {
+        // Verifica validità dei campioni.
+        static_assert(vector_dimension(x) == vector_dimension(fx), "");
+        static_assert(vector_dimension(x) > 0, "");
+
+        // Restituisce la funzione interpolante.
+        return [x, fx](float value)
+        {
+            // Numero dei campioni.
+            constexpr auto x_size = vector_dimension(x);
+
+            // Accumulatore del risultato.
+            float result = 0;
+
+            // Esecuzione formula.
+            for(int k = 0; k < x_size; k++)
+            {
+                auto basis = lagrange_basis(x, k);
+                result += basis(value) * access_column_vector(fx, k);
+            }
+
+            return result;
         };
     }
 

@@ -25,7 +25,7 @@ int main()
 
         for(int k = 0; k < node_count; ++k)
         {
-            auto basis = nc::lagrange_basis(node_vec, k);
+            auto basis = nc::newton_basis(node_vec, k);
             auto val = basis(j);
 
             std::cout << val << " ";

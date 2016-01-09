@@ -1,6 +1,6 @@
 set style data lines
 set offsets 0,0,0,0
-set yrange [-1:1]
+
 set samples 100
 
 plot "temp.txt" u 1:2 smooth cspline, '' u 1:3 smooth cspline, '' u 1:4 smooth cspline, '' u 1:5 smooth cspline, '' u 1:6 smooth cspline, '' u 1:7 smooth cspline

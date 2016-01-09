@@ -407,7 +407,7 @@ int main()
     }
 
     // lagrange test
-    if(false)
+    if(true)
     {
         auto f = [](auto val)
         {
