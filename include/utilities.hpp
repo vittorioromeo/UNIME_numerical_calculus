@@ -23,7 +23,7 @@ namespace nc
         {
             fn(k);
         }
-    };
+    }
 
     // Itera controllando la divergenza e le iterazioni massime.
     template <typename TF>
