@@ -1,10 +1,20 @@
 #include "nc_cpp.hpp"
 #include "../../test/utils/nc_test_utils.hpp"
 
+constexpr auto poly2(float x) noexcept
+{
+    return -3 * std::pow(x, 5) + 4 * std::pow(x, 4) + -2 * std::pow(x, 3) +
+           5 * std::pow(x, 2) + -2.5 * x;
+}
+
 constexpr auto poly(float x) noexcept
 {
-    return -3 * std::pow(5, x) + 4 * std::pow(4, x) + -2 * std::pow(3, x) +
-           5 * std::pow(2, x) + -2.5 * std::pow(1, x);
+    return 2 * std::pow(x, 5) + 4 * std::pow(x, 3) + 6 * x;
+}
+
+constexpr auto node_val(float n, float i)
+{
+    return (2.0 / n) * i;
 }
 
 int main()
@@ -37,32 +47,22 @@ int main()
     };
 
     auto x_vec = nc::make_column_vector<float>( // .
-        -5,                                     // .
-        -4,                                     // .
-        -3,                                     // .
-        -2,                                     // .
-        -1,                                     // .
-        0,                                      // .
-        1,                                      // .
-        2,                                      // .
-        3,                                      // .
-        4,                                      // .
-        5                                       // .
+        node_val(6, 0),                         // .
+        node_val(6, 1),                         // .
+        node_val(6, 2),                         // .
+        node_val(6, 3),                         // .
+        node_val(6, 4),                         // .
+        node_val(6, 5)                          // .
         );
 
 
     auto fx_vec = nc::make_column_vector<float>( // .
-        poly(-5),                                // .
-        poly(-4),                                // .
-        poly(-3),                                // .
-        poly(-2),                                // .
-        poly(-1),                                // .
-        poly(0),                                 // .
-        poly(1),                                 // .
-        poly(2),                                 // .
-        poly(3),                                 // .
-        poly(4),                                 // .
-        poly(5)                                  // .
+        poly(node_val(6, 0)),                    // .
+        poly(node_val(6, 1)),                    // .
+        poly(node_val(6, 2)),                    // .
+        poly(node_val(6, 3)),                    // .
+        poly(node_val(6, 4)),                    // .
+        poly(node_val(6, 5))                     // .
         );
 
     print_matrix(x_vec);
@@ -70,7 +70,7 @@ int main()
 
     auto executor = exec(x_vec, fx_vec);
 
-    for(float j = -10; j < 10; j += 0.25)
+    for(float j = -1; j < 1; j += 0.01)
     {
         executor(j);
     }
