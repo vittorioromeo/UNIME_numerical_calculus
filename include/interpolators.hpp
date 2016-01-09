@@ -34,7 +34,7 @@ namespace nc
 
     // Calcola la base di Lagrange.
     template <typename TNodeVector, typename T>
-    auto lagrange_basis(const TNodeVector& nodes, const T& k)
+    auto lagrange_basis(const TNodeVector& nodes, const T& k) noexcept
     {
         constexpr auto n = vector_dimension(nodes);
 
@@ -55,7 +55,7 @@ namespace nc
 
     // Calcola la base di Newton.
     template <typename TNodeVector, typename T>
-    auto newton_basis(const TNodeVector& nodes, const T& j)
+    auto newton_basis(const TNodeVector& nodes, const T& j) noexcept
     {
         return [nodes, j](auto x)
         {
@@ -82,7 +82,7 @@ namespace nc
         // La matrice rappresenta un sistema lineare.
         // I coefficenti della matrice sono ottenuti dal vettore `x`.
         auto vmm = impl::make_vandermonde_matrix<float, TN, TN + 1>(
-            [](auto& v, auto i)
+            [](const auto& v, auto i)
             {
                 return access_column_vector(v, i);
             },
@@ -96,6 +96,7 @@ namespace nc
 
         // Risolvi il sistema con il metodo Gauss.
         // Troviamo così i coefficenti del polinomio interpolatore.
+
         auto solved_vmm = vmm.solve_gauss();
 
         // TODO:
@@ -115,10 +116,13 @@ namespace nc
             for(auto k(0); k < TN; ++k)
             {
                 // `k`-esimo coefficiente.
-                auto coeff = solved_vmm(0, k);
+                auto coeff = solved_vmm(k, 0);
+
+                // Base monomiale.
+                auto basis = monomial_basis(value, k);
 
                 // Calcola il monomio di grado `k`.
-                acc += coeff * monomial_basis(value, k);
+                acc += coeff * basis;
             }
 
             return acc;
