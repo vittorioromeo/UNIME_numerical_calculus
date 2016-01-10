@@ -14,5 +14,13 @@ g++ -std=c++14 -O3 -larmadillo \
     -Wno-unreachable-code \
     -Wnon-virtual-dtor \
     -Woverloaded-virtual \
+    -Wsuggest-final-types \
+    -Wsuggest-final-methods \
+    -Wsuggest-override \
+    -Wsuggest-attribute=pure \
+    -Wsuggest-attribute=const \
+    -Wsuggest-attribute=noreturn \
+    -Wsuggest-attribute=format \
+    -Wsequence-point \
     -lboost_program_options \
     $1 -o /tmp/x.x && /tmp/x.x "${@:2}"
