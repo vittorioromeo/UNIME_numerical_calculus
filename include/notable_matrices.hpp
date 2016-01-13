@@ -32,7 +32,7 @@ namespace nc
 
         result.for_idxs([&result](auto i, auto j)
             {
-                result(i, j) = 1.f / ((i + 1.f) + (j + 1.f) - 1.f);
+                result(i, j) = 1.0 / ((i + 1.f) + (j + 1.f) - 1.f);
             });
 
         return result;

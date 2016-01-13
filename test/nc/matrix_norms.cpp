@@ -213,6 +213,12 @@ int main()
             verify_relationship_2(x);
             verify_relationship_3(x);
         }
+
+        auto v_to_test = nc::make_column_vector<double>(-1,1);
+        verify_relationship_0(v_to_test);
+        verify_relationship_1(v_to_test);
+        verify_relationship_2(v_to_test);
+        verify_relationship_3(v_to_test);
     }
 
     // TODO: vettori equidistanti

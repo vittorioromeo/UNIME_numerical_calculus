@@ -19,7 +19,7 @@ int main()
         min_node + (node_ep * 6)                   // .
         );
 
-    for(float j = -1; j < 1; j += 0.1)
+    for(float j = -1; j <= 1.1; j += 0.1)
     {
         std::cout << j << " ";
 
