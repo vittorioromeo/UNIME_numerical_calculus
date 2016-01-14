@@ -400,9 +400,12 @@ namespace nc
         auto norm_frobenius() const noexcept
         {
             double acc(0);
-            for(auto k(0); k < order(); ++k)
+            for(auto i(0); i < row_count(); ++i)
             {
-                acc += std::pow((*this)(k, k), 2);
+                for(auto j(0); j < column_count(); ++j)
+                {
+                    acc += std::abs(std::pow((*this)(i, j), 2));
+                }
             }
 
             return std::sqrt(acc);
@@ -688,8 +691,7 @@ namespace nc
         }
 
         template <typename TSolutions, typename TF>
-        auto solve_gauss_seidel(TSolutions phi,
-            std::size_t max_iterations,
+        auto solve_gauss_seidel(TSolutions phi, std::size_t max_iterations,
             accuracy_type accuracy, TF loop_fn)
         {
             // La matrice deve avere una colonna in più delle righe.

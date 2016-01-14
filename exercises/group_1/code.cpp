@@ -142,7 +142,7 @@ int main()
         // Matrice di Vandermonde
         {
             (void)nc::make_vandermonde_matrix<float, 4>(
-                nc::make_column_vector<float>(1, 2, 3, 4));
+                nc::make_row_vector<float>(1, 2, 3, 4));
         }
     }
 }

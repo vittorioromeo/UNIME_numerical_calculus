@@ -98,5 +98,5 @@ auto confront_norms = [](const auto& title, const auto& m)
 auto print_norm_values = [](const auto& v)
 {
     std::cout << v.order() << " " << v.norm_1() << " " << v.norm_2() << " "
-              << v.norm_inf() << " " << v.norm_frobenius() << " " << std::log(v.perturbation_index()) << "\n";
+              << v.norm_inf() << " " << v.norm_frobenius() << " " << v.perturbation_index() << "\n";
 };

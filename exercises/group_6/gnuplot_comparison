@@ -1,6 +1,6 @@
 set style data lines
 set offsets 0,0,0,0
-set yrange [0:16]
 set samples 100
+# set logscale y
 
-plot "temp.txt" u 1:2 title "err jacobi" smooth cspline, '' u 1:3 title "err gauss/seidel" smooth cspline
+plot "temp.txt" u 1:2 title "err gauss/seidel" smooth cspline, '' u 1:3 title "err jacobi" smooth cspline
