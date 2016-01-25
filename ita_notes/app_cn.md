@@ -155,7 +155,7 @@ $$ x = \pm ( .d_1 d_2 ... d_t ) B^p $$
 
     * $\varepsilon y = \frac{|f(x_p)| - |f(x_r)|}{|f(x_r)|}$.
 
-    * Se $\varepsilon x >> \varepsilon y$ allora **i dati sono malcondizionati**.
+    * Se $\varepsilon x \ll \varepsilon y$ allora **i dati sono malcondizionati**.
 
 ### Errore aritmetico
 
@@ -676,7 +676,7 @@ $$
 
 * Bisogna determinare $g(x) = \sum_{j=0}^{n} \alpha_j \Phi_j(x)$, dove $g(x) = f(x), \forall x \in x_1, ..., x_n$.
 
-* Tramite $g$ determineremo un *polinomio di interpolazione** della forma: $p(x) = a_0x^n + a_1x^{(n-1)} + ... + a_{n-1}x + a_n$.
+* Tramite $g$ determineremo un **polinomio di interpolazione** della forma: $p(x) = a_0x^n + a_1x^{(n-1)} + ... + a_{n-1}x + a_n$.
 
 ## Interpolazione polinomiale
 
