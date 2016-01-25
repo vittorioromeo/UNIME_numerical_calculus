@@ -311,7 +311,7 @@ $$
     
     * Metodo di **Gauss**, metodo di **Cholesky**.
 
-### Metodi indiretti
+### Metodi iterativi
 
 * Risolvono i sistemi partendo da un $x$ arbitraria, avvicinandosi alla soluzione reale con ogni iterazione.
 
