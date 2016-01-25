@@ -70,14 +70,14 @@ $$ \{ x \in R: x = sgn(x) B^p \sum_{i=1}^{t} d_i B^{-i}, 0 \leq d_i < B, i = 1, 
 
 $$ x = \pm ( .d_1 d_2 ... d_t ) B^p $$
 
-![Rappresentazione numeri reali](res/repr.png)
+![Rappresentazione numeri reali](res/repr.png){ width=50% }
 
 
 * Se $x$ non appartiene a $F(B,t,m,M)$, si pone il problema di associare un $x'$ adeguato a $x$. Si presentano due casi:
 
     * $p \notin [-m, M]$: overflow ed underflow.
 
-    * $p \in [-m, M], p \notin F$: troncamento ed arrotondamento.
+    * $p \in [-m, M], x \notin F$: troncamento ed arrotondamento.
 
 
 ### Overflow e underflow
@@ -155,7 +155,7 @@ $$ x = \pm ( .d_1 d_2 ... d_t ) B^p $$
 
     * $\varepsilon y = \frac{|f(x_p)| - |f(x_r)|}{|f(x_r)|}$.
 
-    * Se $\varepsilon x \ll \varepsilon y$ allora **i dati sono malcondizionati**.
+    * Se $\varepsilon y \gg \varepsilon x$ allora **i dati sono malcondizionati**.
 
 ### Errore aritmetico
 
@@ -167,11 +167,11 @@ $$ x = \pm ( .d_1 d_2 ... d_t ) B^p $$
     
     *   $xy = x(1+\varepsilon x) y(1+\varepsilon y)$.
 
-        $xy \simeq 1 + \varepsilon x + \varepsilon y$.
+        $xy \simeq xy( 1 + \varepsilon x + \varepsilon y)$.
 
 * Divisione: 
 
-    * $x/y \simeq 1 + \varepsilon x - \varepsilon y$.
+    * $x/y \simeq x/y ( 1 + \varepsilon x - \varepsilon y) $.
 
 * Somma:
 
@@ -408,7 +408,7 @@ $$
 
 1. Dato che $A$ è simmetrica, $D D^{-1} = I$.
 
-2. $ A = LU = LIU = LD D^{-1} U$.
+2. $A = LU = LIU = LD D^{-1} U$.
 
 3. Definiamo $D^{-1} U = Y$. Quindi, $A = LDY$.
 
@@ -473,7 +473,7 @@ $$ b_i^{(k+1)} =   \begin{cases} b_i^{(k)}, & \mbox{se } i \leq k \\
 
 2. Usare le operazioni di Gauss **per annullare la sottodiagonale** di $A$.
 
-3. Annulliamo la sopradiagonale di $A$.
+3. Annulliamo la sopradiagonale di $A$ *(Gauss-Jordan)*.
 
 4. Dividiamo ogni riga per il pivot *(valore della diagonale principale)*.
 
@@ -581,35 +581,35 @@ $$
 
 * Dati $A=M-N$, $P=M^{-1} N$, e $||P|| < 1$.
 
-* $\lim_{k\to\infty} x^k = x^*$.
+* $\lim_{k\to\infty} x^{(k)} = x^*$.
 
     * Dove $x^*$ è la soluzione *esatta*.
 
 ### Dimostrazione
 
-1. $Ax=b$, $A=M-n$,$P=M^{-1} N$, e $Q= M^{-1} b$.
+1. $Ax=b$, $A=M-N$,$P=M^{-1} N$, e $Q= M^{-1} b$.
 
 2. Esplicitiamo $x$: $x = M^{-1}(Nx + b) = M^{-1} Nx + M^{-1} b$.
 
 3. Sostituiamo con $P$ e $Q$: $x= Px + Q$. 
 
-4. (@dim_itr_0) Usiamo la tecnica iterativa: $ x^{(k)} = Px^{(k-1)} + Q$.
+4. (1) Usiamo la tecnica iterativa: $x^{(k)} = Px^{(k-1)} + Q$.
 
-5. Se *(per ipotesi)* $\lim_{k\to\infty} x^k = x^*$, allora (@dim_itr_1) $ x^* = Px^* + Q$.
+5. Se *(per ipotesi)* $\lim_{k\to\infty} x^k = x^*$, allora (2) $ x^* = Px^* + Q$.
 
 6. Definiamo l'errore $e^{(k)} = x^* - x^{(k)}$.
 
-7. Mettiamo l'errore in relazione con @dim_itr_0 e @dim_itr_1: $e^{(k)} = x^* - x^{(k)} = P(x^* - x^{(k)})$.
+7. Mettiamo l'errore in relazione con (1) e (2): $e^{(k)} = x^* - x^{(k)} = P(x^* - x^{(k)})$.
 
 8. $e^{(k)} =  P^1(e^{(k-1)})$.
 
 9. In generale: $e^{(k)} =  P^k(e^{(0)}) = P^1(e^{(k-1)}) = P^2(e^{(k-2)}) = ...$.
 
-10. Applichiamo la norma: $||e^{(k)}|| =  ||P^k(e^{(0)})|| \leq ||P^k|| || e^{(0)}||$ *(per ipotesi $||P|| < 1$)*.
+10. Applichiamo la norma: $||e^{(k)}|| =  ||P^k(e^{(0)})|| \leq ||P||^k || e^{(0)}||$ *(per ipotesi $||P|| < 1$)*.
 
-11. Dato che $e$ e $P$ sono in relazione, analizziamo i limiti. Se $\lim_{k\to\infty} ||P||^k = 0$, allora $\lim_{k\to\infty} ||e^{(k)}|| = 0$, allora $\lim_{k\to\infty} e^k = 0$.
+11. Dato che $e$ e $P$ sono in relazione, analizziamo i limiti. Se $\lim_{k\to\infty} ||P||^k = 0$, allora $\lim_{k\to\infty} ||e^{(k)}|| = 0$, allora $\lim_{k\to\infty} e^{(k)} = 0$.
 
-12. Se $\lim_{k\to\infty} e^k = 0$, allora l'errore converge a 0.
+12. Se $\lim_{k\to\infty} e^{(k)} = 0$, allora l'errore converge a 0.  Inoltre $\lim_{k\to\infty} x^{(k)} = x^*$.
 
 ## Condizione necessaria e sufficiente di convergenza
 
@@ -630,7 +630,7 @@ $$
 
     * $-D^{-1} (E+F)$ è detta matrice di iterazione $T_j$.
 
-* $x_i^{(k)} = \frac{1}{a_{ii}} (\sum_{j=1, j \neq i}^{n} - a_{ij} x_j^{(k-1)} + b_i)$.
+* $x_i^{(k)} = \frac{1}{a_{ii}} (- \sum_{j=1, j \neq i}^{n}  a_{ij} x_j^{(k-1)} + b_i)$.
 
 
 
@@ -716,11 +716,11 @@ $$
 
 ### Base di Lagrange
 
-* $L_j(x) = \prod_{i=0, i=j}^{n} \frac{x-x_i}{x_j-x_i}$, $j=0,...,n$.
+* $L_j(x) = \prod_{i=0, i \neq j}^{n} \frac{x-x_i}{x_j-x_i}$, $j=0,...,n$.
 
 ### Polinomio finale
 
-* $P_n(x) = \sum_{j=0}^{n} f(x_j) L_j(x_j)$.
+* $P_n(x) = \sum_{j=0}^{n} f(x_j) L_n(x)$.
 
 
 
@@ -763,12 +763,9 @@ $$
 
     * ...allora $r(x) = \pi_n(x) \frac{f^{(n+1)}(\xi)}{(n+1)!}$.
 
-    * Inoltre, $s(x) = \frac{r(x)}{\pi_n(x)}$.
-
-        * $s$ è la superficie.
-
-
 ### Dimostrazione
+
+* Con $s(x) = \frac{r(x)}{\pi_n(x)}$.
 
 * Con $a<x<b$ e $x \neq x_i$, definiamo $v(y) = r(y) - s(x) \pi_n(y)$.
 
@@ -780,6 +777,7 @@ $$
 
 * $0 = v^{(n+1)}(\xi) = r^{(n+1)}(\xi) - (n+1)! s(x) = f^{(n+1)}(\xi) - (n+1)! s(x)$.
 
+* Quindi $r(x) = \pi_n(x) \frac{f^{(n+1)}(\xi)}{(n+1)!}$.
 
 ## Fenomeno di Runge
 
@@ -861,7 +859,7 @@ $$
 
 #### Versione composita
 
-* $\int_{a}^{b} f(x) dx = \frac{b-a}{6n} (f(a) + 4 \sum_{i=1}^{2n, 2} f(x_i) + 2 \sum_{i=2}^{2n - 1, 2} f(b))$.
+* $\int_{a}^{b} f(x) dx = \frac{b-a}{6n} (f(a) + 4 \sum_{i=1}^{2n, 2} f(x_i) + 2 \sum_{i=2}^{2n + 1, 2} f(x_i) + f(b))$.
 
 
 
@@ -873,5 +871,5 @@ $$
 
     * Se $n$ è pari, $S = n + 2$ e $\Upsilon_n = \int_0^n t \pi_n(t) dt$.
 
-    * Se $n$ è dispari, $S = n + 1$ e $\Upsilon_n = \int_0^n t \pi_n(t) dt$.
+    * Se $n$ è dispari, $S = n + 1$ e $\Upsilon_n = \int_0^n \pi_n(t) dt$.
 
