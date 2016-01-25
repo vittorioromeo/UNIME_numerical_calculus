@@ -220,11 +220,11 @@ $$ x = \pm ( .d_1 d_2 ... d_t ) B^p $$
 
 ## Norme matriciali
 
-* $|| . ||: \mathbb{C}^{n \times m} \rightarrow \mathbb{R}$.
+* $|| . ||: \mathbb{C}^{m \times n} \rightarrow \mathbb{R}$.
 
 ### Quattro proprietà
 
-1. $||A|| > 0$ per $\forall A \in \mathbb{C}^{n \times m}$, $||A|| = 0$ solo per $A = 0$.
+1. $||A|| > 0$ per $\forall A \in \mathbb{C}^{m \times n}$, $||A|| = 0$ solo per $A = 0$.
 
 2. $||\alpha A|| = |\alpha| ||A||$ per $\alpha \in \mathbb{R}, \alpha \neq 0$.
 
@@ -236,7 +236,7 @@ $$ x = \pm ( .d_1 d_2 ... d_t ) B^p $$
 
 * Dato che la norma vettoriale **è una funzione continua**...
 
-    * ...allora $\{x \in \mathbb{R}^n : ||x|| = 0\}$ è **un insieme chiuso**.
+    * ...allora $\{x \in \mathbb{R}^n : ||x|| = 1\}$ è **un insieme chiuso**.
 
         * *Insieme chiuso: il bordo dell'insieme appartiene all'insieme stesso.*
 
@@ -342,6 +342,10 @@ $$
 * $||A|| ||A^{-1}|| = \mu (A)$ è detto **indice di condizionamento**.
 
 * Quindi: $\varepsilon x \leq \mu (A) \varepsilon b$.
+
+### Condizionamento e norme
+
+* $\mu(A) \geq 1$ per ogni norma, tranne che per la norma di Frobenius, dove $\mu(A) > 1$.
 
 
 
