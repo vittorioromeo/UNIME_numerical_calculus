@@ -27,7 +27,7 @@ fontsize: 12pt
 
 $$ x = sgn(x) B^p \sum{d_i B^{-i}} $$
 
-* Le quantità $B$, $p$, $d_i$, $\sum{d_i B^{-i}}$ vengono dette:
+* Le quantità $B$, $p$, $d_i$, $\sum_{i=0}^{\infty}{d_i B^{-i}}$ vengono dette:
 
     * $B$: base della rappresentazione.
 
