@@ -21,9 +21,9 @@ fontsize: 12pt
 
 ## Teorema di rappresentazione in base
 
-* Sia $B >= 2$ un numero intero e $x$ un numero reale non nullo. 
+* Sia $B \geq 2$ un numero intero e $x$ un numero reale non nullo. 
 
-* Allora esistono e sono unici un intero $p$ ed una succesione $\{d_i\}_{i=1,2,...}$ di interi, $0 <= d_i < B$, $d_1 != 0$, non tutti uguali a $B-1$ da un certo indice in poi, tali che:
+* Allora esistono e sono unici un intero $p$ ed una succesione $\{d_i\}_{i=1,2,...}$ di interi, $0 \leq d_i < B$, $d_1 \neq 0$, non tutti uguali a $B-1$ da un certo indice in poi, tali che:
 
 $$ x = sgn(x) B^p \sum{d_i B^{-i}} $$
 
@@ -45,7 +45,7 @@ $$ x = \pm ( .d_1 d_2 ... ) B^p $$
 
 ### Forma normalizzata
 
-* Se $d_1 != 0$ e se la mantissa $\in [0, 1]$, la rappresentazione in base é **normalizzata**.
+* Se $d_1 \neq 0$ e se la mantissa $\in [0, 1]$, la rappresentazione in base é **normalizzata**.
 
     * La normalizzazione fornisce un'approssimazione migliore.
 
