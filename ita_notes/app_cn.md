@@ -164,14 +164,14 @@ $$ x = \pm ( .d_1 d_2 ... d_t ) B^p $$
 * Definiamo $x = x(1+\varepsilon x)$ e $y = y(1+\varepsilon y)$.
 
 * Moltiplicazione:
-    
+
     *   $xy = x(1+\varepsilon x) y(1+\varepsilon y)$.
 
         $xy \simeq xy( 1 + \varepsilon x + \varepsilon y)$.
 
-* Divisione: 
+* Divisione:
 
-    * $x/y \simeq x/y ( 1 + \varepsilon x - \varepsilon y) $.
+    * $x / y \simeq x / y ( 1 + \varepsilon x - \varepsilon y)$.
 
 * Somma:
 
@@ -599,7 +599,7 @@ $$
 
 4. (1) Usiamo la tecnica iterativa: $x^{(k)} = Px^{(k-1)} + Q$.
 
-5. Se *(per ipotesi)* $\lim_{k\to\infty} x^k = x^*$, allora (2) $ x^* = Px^* + Q$.
+5. Se *(per ipotesi)* $\lim_{k\to\infty} x^k = x^*$, allora (2) $x^* = Px^* + Q$.
 
 6. Definiamo l'errore $e^{(k)} = x^* - x^{(k)}$.
 
