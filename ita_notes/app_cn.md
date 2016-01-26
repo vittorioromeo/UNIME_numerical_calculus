@@ -628,6 +628,12 @@ $$
 
 * $A=M-N$, $M=D$, $N=-(E+F)$, $A=D+E+F$.
 
+    * $D$ è una matrice diagonale avente i valori della diagonale di $A$.
+
+    * $E$ è la matrice triangolare superiore di $A$.
+
+    * $F$ è la matrice triangolare inferiore di $A$.
+
 * $x^{(k)} = M^{-1} Nx^{(k-1)} + M^{-1} b$.
 
 * $x^{(k)} = -D^{-1} (E-F)x^{(k-1)} + D^{-1} b$. 
