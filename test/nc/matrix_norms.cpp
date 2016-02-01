@@ -540,6 +540,7 @@ int main()
 
         std::cout << "creating mi\n";
         auto mi = nc::monomial_interpolator<3>(x, fx);
+        (void) mi;
 
         // print_matrix(mi);
     }
